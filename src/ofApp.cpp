@@ -15,6 +15,10 @@ string filen = "input.jpg";
 //--------------------------------------------------------------
 void ofApp::setup(){
     //cam.setup(CAMX, CAMY);
+    ofFileDialogResult loadpath = ofSystemLoadDialog("Choose image to dither", false, "input.jpg");
+    filen = loadpath.getPath();
+    ofLog() << filen;
+
     res.allocate(CAMX, CAMY, OF_IMAGE_COLOR);
     
     //img.load("/Users/a/Pictures/inspires/Untitled-3.png");
@@ -35,18 +39,16 @@ void ofApp::update(){
     //cam.update();
     res.getPixelsRef().resize(CAMX/x_r,CAMY/y_r, OF_INTERPOLATE_NEAREST_NEIGHBOR);
     res.update();
-
-    if(true) {
-        if(dither_type == 0) {
-            dither.dither_ordered(res, res, 8);
-            res.getPixelsRef().resize(CAMX,CAMY,OF_INTERPOLATE_NEAREST_NEIGHBOR);
-            res.update();
-        } else if (dither_type == 1) {
-            dither.dither_floyd_steinberg(res, res);
-            res.getPixelsRef().resize(CAMX,CAMY,OF_INTERPOLATE_NEAREST_NEIGHBOR);
-            res.update();
-            //res.getPixelsRef().resize(CAMX*8,CAMY*8,OF_INTERPOLATE_NEAREST_NEIGHBOR);
-        }
+    
+    if(dither_type == 0) {
+        dither.dither_ordered(res, res, 8);
+        res.getPixelsRef().resize(CAMX,CAMY,OF_INTERPOLATE_NEAREST_NEIGHBOR);
+        res.update();
+    } else if (dither_type == 1) {
+        dither.dither_floyd_steinberg(res, res);
+        res.getPixelsRef().resize(CAMX,CAMY,OF_INTERPOLATE_NEAREST_NEIGHBOR);
+        res.update();
+        //res.getPixelsRef().resize(CAMX*8,CAMY*8,OF_INTERPOLATE_NEAREST_NEIGHBOR);
     }
 }
 
