@@ -11,7 +11,7 @@ int dither_type = 0;
 int x_r = 4;
 int y_r = 4;
 
-string filen = "/Users/a/Documents/Reeds_at_the_Swan_Lake_Nature_Study_Area.jpg";
+string filen = "input.jpg";
 //--------------------------------------------------------------
 void ofApp::setup(){
     //cam.setup(CAMX, CAMY);
